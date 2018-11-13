@@ -1,5 +1,5 @@
 target/
-/target
-*.class
+.class
 .project
 .settings/
+mvn_build.bat

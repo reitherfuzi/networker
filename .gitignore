@@ -1,5 +1,8 @@
 target/
+.settings/
+
 .class
 .project
-.settings/
+.classpath
+
 mvn_build.bat

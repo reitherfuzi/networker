@@ -1,8 +1,3 @@
 target/
-.settings/
-
-.class
-.project
-.classpath
-
-mvn_build.bat
+.idea/
+*.iml

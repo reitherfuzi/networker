@@ -1,5 +1,7 @@
 package at.pwimmer.test.net.config;
 
+import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.List;
 
 import at.pwimmer.test.net.model.PingSystem;
@@ -7,14 +9,17 @@ import at.pwimmer.test.net.model.PingSystem;
 public class AppConfig {
 	private String gateway;
 	private List<PingSystem> systemList;
-	
+
 	public AppConfig(String gateway, List<PingSystem> pingSystemList) {
 		setGateway(gateway);
-		setIPMap(pingSystemList);
+		setSystemList(pingSystemList);
 	}
 	
-	public AppConfig() {}
-	
+	public AppConfig() {
+		setSystemList(new ArrayList<>());
+		setGateway(InetAddress.getLoopbackAddress().getHostAddress());
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,28 +57,20 @@ public class AppConfig {
 	}
 	
 	public void setGateway(String gateway) {
-		if(gateway != null && !gateway.trim().isEmpty()) {
-			this.gateway = gateway;
-		}
-		else {
-			throw new IllegalArgumentException("The passed Gateway is null or empty!");
-		}
+		if(gateway == null || gateway.trim().isEmpty()) 	throw new IllegalArgumentException("The passed Gateway is null or empty!");
+		this.gateway = gateway;
 	}
 	
-	public void setIPMap(List<PingSystem> pingSystemList) {
-		if(pingSystemList != null) {
-			this.systemList = pingSystemList;
-		}
-		else {
-			throw new IllegalArgumentException("The passed Map is null!");
-		}
+	public void setSystemList(List<PingSystem> pingSystemList) {
+		if(pingSystemList == null)	throw new IllegalArgumentException("The passed Map is null!");
+		this.systemList = pingSystemList;
 	}
-	
+
 	public String getGateway() {
 		return gateway;
 	}
 	
-	public List<PingSystem> getIPMap() {
+	public List<PingSystem> getSystemList() {
 		return systemList;
 	}
 }

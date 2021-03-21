@@ -32,14 +32,11 @@ public class PingPanel extends JPanel {
 	private StatusPanel panelWorkerStatus;
 	
 	public PingPanel(AppConfig config) {
-		if(config != null) {
-			initComponents();
-			this.config = config;
-			this.tableModel = new IPTableModel(config.getIPMap());
-		}
-		else {
-			throw new IllegalArgumentException("The passed App-Config is null!");
-		}
+		if(config == null) 	throw new IllegalArgumentException("The passed App-Config is null!");
+
+		this.config = config;
+		this.tableModel = new IPTableModel(config.getSystemList());
+		initComponents();
 	}
 	
 	@SuppressWarnings("unused")
@@ -93,7 +90,7 @@ public class PingPanel extends JPanel {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, "cell 0 3 3 1,grow");
-		
+
 		tableSystems = new JTable();
 		tableSystems.setFont(DEFAULT_FONT);
 		tableSystems.setFillsViewportHeight(true);
@@ -103,7 +100,7 @@ public class PingPanel extends JPanel {
 		JPanel panel = new JPanel();
 		add(panel, "cell 0 4 3 1,grow");
 		panel.setLayout(new MigLayout("", "[grow][][grow][grow]", "[grow]"));
-		
+
 		JButton btnPingSystemlist = new JButton("Ping System-List");
 		btnPingSystemlist.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel.add(btnPingSystemlist, "flowx,cell 0 0,growx");
@@ -119,7 +116,7 @@ public class PingPanel extends JPanel {
 		btnPingAll.addActionListener(e -> {
 			pingSingleSystem(config.getGateway(), "Gateway", panelStatusGW);
 			pingSingleSystem(GOOGLE_IP, "Google", panelStatusGoogle);
-			pingMultipleSystems(config.getIPMap());
+			pingMultipleSystems(config.getSystemList());
 		});
 		
 		panelWorkerStatus = new StatusPanel();

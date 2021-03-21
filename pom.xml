@@ -1,11 +1,15 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>at.pwimmer.networker</groupId>
 	<artifactId>networker</artifactId>
-	<version>0.1</version>
+	<version>1.1</version>
 	<name>Networker</name>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -15,7 +19,19 @@
 				<configuration>
 					<target>1.8</target>
 					<source>1.8</source>
-					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>1.8</version>
+							<vendor>oracle</vendor>
+						</jdk>
+					</toolchains>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -37,8 +53,7 @@
 							<outputFile>target/net_application-run.jar</outputFile>
 							<shadedArtifactAttached>false</shadedArtifactAttached>
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
 									<mainClass>at.pwimmer.test.net.NetMain</mainClass>
 								</transformer>
 							</transformers>
@@ -48,6 +63,7 @@
 			</plugin>
 		</plugins>
 	</build>
+
 	<dependencies>
 		<!-- Swing MIG-Layout -->
 		<dependency>
@@ -55,16 +71,11 @@
 			<artifactId>miglayout-swing</artifactId>
 			<version>5.2</version>
 		</dependency>
-		<!-- Log4J Core & API -->
+		<!-- Log4Js SLF4J-Implementation -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.13.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-api</artifactId>
-			<version>2.13.1</version>
+			<artifactId>log4j-slf4j-impl</artifactId>
+			<version>2.14.0</version>
 		</dependency>
 		<!-- JUnit4 Tests -->
 		<dependency>
@@ -77,7 +88,7 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.10.3</version>
+			<version>2.11.0</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -14,12 +14,8 @@ public class IPTableModel extends AbstractTableModel {
 	private final List<PingSystem> list;
 	
 	public IPTableModel(List<PingSystem> list) {
-		if(list != null) {
-			this.list = list;
-		}
-		else {
-			throw new IllegalArgumentException("The passed Map is null!");
-		}
+		if(list == null)	throw new IllegalArgumentException("The passed Map is null!");
+		this.list = list;
 	}
 	
 	public IPTableModel() {
